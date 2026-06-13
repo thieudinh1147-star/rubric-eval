@@ -1,0 +1,38 @@
+{
+  "X": [
+    {"title": "Shape of You", "artist": "Ed Sheeran", "link": "https://www.youtube.com/watch?v=JGwWNGJdvx8"},
+    {"title": "Blinding Lights", "artist": "The Weeknd", "link": "https://www.youtube.com/watch?v=4NRXx6U8ABQ"},
+    {"title": "Dance Monkey", "artist": "Tones and I", "link": "https://www.youtube.com/watch?v=q0hyYWKXF0Q"},
+    {"title": "Levitating", "artist": "Dua Lipa", "link": "https://www.youtube.com/watch?v=TUVcZfQe-Kw"},
+    {"title": "Stay", "artist": "The Kid LAROI", "link": "https://www.youtube.com/watch?v=kTJczUoc26U"},
+    {"title": "Peaches", "artist": "Justin Bieber", "link": "https://www.youtube.com/watch?v=tQ0yjYUFKAE"},
+    {"title": "Good 4 U", "artist": "Olivia Rodrigo", "link": "https://www.youtube.com/watch?v=gNi_6U5Pm_o"},
+    {"title": "Montero", "artist": "Lil Nas X", "link": "https://www.youtube.com/watch?v=6swmTBVI83k"},
+    {"title": "Bad Habits", "artist": "Ed Sheeran", "link": "https://www.youtube.com/watch?v=orJSJGHjBLI"},
+    {"title": "Heat Waves", "artist": "Glass Animals", "link": "https://www.youtube.com/watch?v=mRD0-GxqHVo"}
+  ],
+  "Y": [
+    {"title": "As It Was", "artist": "Harry Styles", "link": "https://www.youtube.com/watch?v=H5v3kku4y6Q"},
+    {"title": "About Damn Time", "artist": "Lizzo", "link": "https://www.youtube.com/watch?v=IXXxciRUMzI"},
+    {"title": "Anti-Hero", "artist": "Taylor Swift", "link": "https://www.youtube.com/watch?v=b1kbLwvqugk"},
+    {"title": "Golden Hour", "artist": "JVKE", "link": "https://www.youtube.com/watch?v=PEM0kvsP_OA"},
+    {"title": "Flowers", "artist": "Miley Cyrus", "link": "https://www.youtube.com/watch?v=G7KNmW9a75Y"},
+    {"title": "Calm Down", "artist": "Rema & Selena Gomez", "link": "https://www.youtube.com/watch?v=OdPxONlv5JQ"},
+    {"title": "Unholy", "artist": "Sam Smith", "link": "https://www.youtube.com/watch?v=Uq9gPaIzbe8"},
+    {"title": "Escapism", "artist": "RAYE", "link": "https://www.youtube.com/watch?v=WXmld0HRMQQ"},
+    {"title": "Quevedo Bzrp", "artist": "Bizarrap", "link": "https://www.youtube.com/watch?v=I_ZnlhqoLzU"},
+    {"title": "Shakira Bzrp", "artist": "Bizarrap", "link": "https://www.youtube.com/watch?v=ZmDBbnmKpqQ"}
+  ],
+  "Z": [
+    {"title": "Bohemian Rhapsody", "artist": "Queen", "link": "https://www.youtube.com/watch?v=fJ9rUzIMcZQ"},
+    {"title": "Hoa Nở Không Màu", "artist": "Hoài Lâm", "link": "https://www.youtube.com/watch?v=example1"},
+    {"title": "Nơi Này Có Anh", "artist": "Sơn Tùng M-TP", "link": "https://www.youtube.com/watch?v=example2"},
+    {"title": "Running in the 90s", "artist": "Max Coveri", "link": "https://www.youtube.com/watch?v=example3"},
+    {"title": "Tầm Thường", "artist": "Da LAB", "link": "https://www.youtube.com/watch?v=example4"},
+    {"title": "Havana", "artist": "Camila Cabello", "link": "https://www.youtube.com/watch?v=HCjNJDNzw8Y"},
+    {"title": "Old Town Road", "artist": "Lil Nas X", "link": "https://www.youtube.com/watch?v=w2Ov5jzm3j8"},
+    {"title": "Thị Mầu", "artist": "Hoàng Thùy Linh", "link": "https://www.youtube.com/watch?v=example5"},
+    {"title": "Butter", "artist": "BTS", "link": "https://www.youtube.com/watch?v=WMweEpGlu_U"},
+    {"title": "Dynamite", "artist": "BTS", "link": "https://www.youtube.com/watch?v=gdZLi9oWNZg"}
+  ]
+}
