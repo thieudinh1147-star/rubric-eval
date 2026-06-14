@@ -534,7 +534,7 @@ for idx, (tab, pname) in enumerate(zip(tabs, PLAYLIST_NAMES)):
 
             with st.container():
                 # Thang điểm tổng quan
-               st.markdown("""
+                st.markdown("""
                 <p>📋 Bảng đánh giá chi tiết — Playlist </p>
                 <div style="
                     background-color:#1DB954;
@@ -552,7 +552,6 @@ for idx, (tab, pname) in enumerate(zip(tabs, PLAYLIST_NAMES)):
                     </p>
                 </div>
                 """, unsafe_allow_html=True)
-
                 # ════════════════════════════════════════════════════
                 # PHẦN 1 — Sự đa dạng
                 # ════════════════════════════════════════════════════
