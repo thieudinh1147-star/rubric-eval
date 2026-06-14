@@ -483,28 +483,38 @@ for idx, (tab, pname) in enumerate(zip(tabs, PLAYLIST_NAMES)):
 
         player_key = f"playing_{pname}"
 
+        next_song_index = len(heard_set)
+
         for i, song in enumerate(songs):
-            heard_mark = "✅" if i in heard_set else f"{i + 1}."
-
+            is_heard = i in heard_set
+            is_available = i <= next_song_index
+        
+            if is_heard:
+                heard_mark = "✅"
+            elif is_available:
+                heard_mark = f"{i + 1}."
+            else:
+                heard_mark = "🔒"
+        
             col1, col2 = st.columns([0.08, 0.92])
-
+        
             with col1:
                 st.markdown(
                     f"<p style='color:#b3b3b3;margin-top:8px'>{heard_mark}</p>",
                     unsafe_allow_html=True
                 )
-
+        
             with col2:
                 if st.button(
                         f"{song['title']} — {song['artist']}",
                         key=f"song_{pname}_{i}",
-                        use_container_width=True
+                        use_container_width=True,
+                        disabled=not is_available
                 ):
                     st.session_state[player_key] = i
                     heard_set.add(i)
                     st.session_state.heard[pname] = heard_set
                     st.rerun()
-
             # Hiện video ngay dưới bài đang được chọn
             if st.session_state.get(player_key) == i:
                 st.markdown(
