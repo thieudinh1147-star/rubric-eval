@@ -798,6 +798,17 @@ else:
 
 # ── Bảng kết quả tổng hợp ─────────────────────────────────────────────────────
 st.markdown("---")
+st.markdown("## 🔐 Khu vực dành cho nhóm nghiên cứu")
+
+admin_password = st.text_input(
+    "Nhập mật khẩu để xem kết quả",
+    type="password",
+    placeholder="Chỉ nhóm nghiên cứu nhập"
+)
+
+if admin_password != "aegaychungta":
+    st.info("Kết quả khảo sát chỉ hiển thị cho nhóm nghiên cứu.")
+    st.stop()
 st.markdown("## 📊 Kết quả tổng hợp")
 
 if os.path.exists(RESULTS_FILE):
