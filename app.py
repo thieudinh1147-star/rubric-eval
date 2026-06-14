@@ -4,6 +4,7 @@ import json
 import os
 from datetime import datetime
 
+
 # ── Cấu hình trang ──────────────────────────────────────────────────────────
 st.set_page_config(
     page_title="Đánh giá Playlist",
@@ -135,8 +136,7 @@ st.markdown("""
         color: #dddddd !important;
         font-size: 14px !important;
     }
-
-    /* Hộp thang điểm màu Spotify */
+/* Hộp thang điểm màu Spotify */
 .scale-box {
     background-color: #1DB954;
     color: #000000 !important;
@@ -265,15 +265,37 @@ def save_result(evaluator, playlist_name, coherence, serendipity, diversity, sat
 
 
 # ── Hàm nhúng YouTube player ─────────────────────────────────────────────────
-def embed_youtube(link, height=80):
-    video_id = link.split("v=")[-1].split("&")[0] if "v=" in link else ""
-    if not video_id or "example" in video_id:
+def embed_youtube(link, height=220):
+    if not link or "example" in link:
         st.info("🎵 Link nhạc chưa có — thay link thật vào playlist.json")
         return
-    embed_url = f"https://www.youtube.com/embed/{video_id}?autoplay=0"
+
+    video_id = ""
+
+    if "watch?v=" in link:
+        video_id = link.split("watch?v=")[-1].split("&")[0]
+    elif "youtu.be/" in link:
+        video_id = link.split("youtu.be/")[-1].split("?")[0]
+    elif "embed/" in link:
+        video_id = link.split("embed/")[-1].split("?")[0]
+
+    if not video_id:
+        st.warning("Link YouTube chưa đúng định dạng.")
+        return
+
+    embed_url = f"https://www.youtube.com/embed/{video_id}"
+
     st.markdown(
-        f'<iframe width="100%" height="{height}" src="{embed_url}" '
-        f'frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>',
+        f"""
+        <iframe 
+            width="100%" 
+            height="{height}" 
+            src="{embed_url}" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+        </iframe>
+        """,
         unsafe_allow_html=True
     )
 
@@ -310,39 +332,46 @@ for idx, (tab, pname) in enumerate(zip(tabs, PLAYLIST_NAMES)):
         st.progress(min(progress, 1.0), text=f"Đã nghe: {len(heard_set)}/{MIN_SONGS} bài")
 
         # ── Danh sách bài hát ─────────────────────────────────────────────
+        # ── Danh sách bài hát ─────────────────────────────────────────────
         st.markdown("#### Danh sách bài hát")
-        selected_song = None
+
+        player_key = f"playing_{pname}"
 
         for i, song in enumerate(songs):
-            heard_mark = "✅" if i in heard_set else f"{i+1}."
+            heard_mark = "✅" if i in heard_set else f"{i + 1}."
+
             col1, col2 = st.columns([0.08, 0.92])
+
             with col1:
-                st.markdown(f"<p style='color:#b3b3b3;margin-top:8px'>{heard_mark}</p>",
-                            unsafe_allow_html=True)
+                st.markdown(
+                    f"<p style='color:#b3b3b3;margin-top:8px'>{heard_mark}</p>",
+                    unsafe_allow_html=True
+                )
+
             with col2:
-                if st.button(f"{song['title']} — {song['artist']}",
-                             key=f"song_{pname}_{i}",
-                             use_container_width=True):
-                    selected_song = i
+                if st.button(
+                        f"{song['title']} — {song['artist']}",
+                        key=f"song_{pname}_{i}",
+                        use_container_width=True
+                ):
+                    st.session_state[player_key] = i
+                    heard_set.add(i)
+                    st.session_state.heard[pname] = heard_set
+                    st.rerun()
 
-        # ── Player ────────────────────────────────────────────────────────
-        player_key = f"playing_{pname}"
-        if selected_song is not None:
-            st.session_state[player_key] = selected_song
-            heard_set.add(selected_song)
-            st.session_state.heard[pname] = heard_set
-
-        if player_key in st.session_state:
-            i = st.session_state[player_key]
-            song = songs[i]
-            st.markdown("---")
-            st.markdown(f"<div class='now-playing-card'>"
-                        f"<p style='color:#1DB954;font-size:12px;margin:0'>Đang phát</p>"
-                        f"<p style='font-size:16px;font-weight:600;margin:4px 0'>{song['title']}</p>"
-                        f"<p style='color:#b3b3b3;font-size:13px;margin:0'>{song['artist']}</p>"
-                        f"</div>", unsafe_allow_html=True)
-            embed_youtube(song["link"])
-
+            # Hiện video ngay dưới bài đang được chọn
+            if st.session_state.get(player_key) == i:
+                st.markdown(
+                    f"""
+                    <div class='now-playing-card'>
+                        <p style='color:#1DB954;font-size:12px;margin:0'>Đang phát</p>
+                        <p style='font-size:16px;font-weight:600;margin:4px 0'>{song['title']}</p>
+                        <p style='color:#b3b3b3;font-size:13px;margin:0'>{song['artist']}</p>
+                    </div>
+                    """,
+                    unsafe_allow_html=True
+                )
+                embed_youtube(song.get("link", ""), height=220)
         st.markdown("---")
 
         # ── Rubric chấm điểm ──────────────────────────────────────────────
@@ -362,6 +391,7 @@ for idx, (tab, pname) in enumerate(zip(tabs, PLAYLIST_NAMES)):
                 st.markdown("""
                 <div class="scale-box">
                     <p>Thang điểm đánh giá</p>
+                    <p class="scale-note">Xin vui lòng nghe hết playlist để đánh giá.</p>
                     <p class="scale-detail">
                         1 = Rất thấp &nbsp; | &nbsp;
                         2 = Thấp &nbsp; | &nbsp;
@@ -371,7 +401,6 @@ for idx, (tab, pname) in enumerate(zip(tabs, PLAYLIST_NAMES)):
                     </p>
                 </div>
                 """, unsafe_allow_html=True)
-
                 st.caption(
                     "1 = rất rời rạc | 2 = khá rời rạc | 3 = tạm ổn | 4 = khá liền mạch | 5 = rất liền mạch, chuyển bài tự nhiên")
                 coherence = st.slider(
@@ -460,3 +489,6 @@ if os.path.exists(RESULTS_FILE):
         st.info("Chưa có kết quả nào được lưu.")
 else:
     st.info("Chưa có kết quả nào — hãy hoàn thành ít nhất 1 playlist.")
+
+
+  
