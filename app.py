@@ -534,14 +534,24 @@ for idx, (tab, pname) in enumerate(zip(tabs, PLAYLIST_NAMES)):
 
             with st.container():
                 # Thang điểm tổng quan
-                st.markdown("""
-                <div class="scale-box">
-                    <p>📋 Form đánh giá chi tiết — Playlist {pname}</p>
-                    <p class="scale-detail">
-                        1 = Rất thấp &nbsp;|&nbsp; 2 = Thấp &nbsp;|&nbsp; 3 = Trung bình &nbsp;|&nbsp; 4 = Tốt &nbsp;|&nbsp; 5 = Rất tốt
+               st.markdown("""
+                <p>📋 Bảng đánh giá chi tiết — Playlist </p>
+                <div style="
+                    background-color:#1DB954;
+                    border-left:5px solid #000000;
+                    padding:14px 18px;
+                    border-radius:8px;
+                    margin-top:8px;
+                    margin-bottom:18px;
+                ">
+                    <p style="color:#000000 !important; font-size:15px; line-height:1.6; margin:0; font-weight:600;">
+                        Vui lòng nghe toàn bộ các bài hát trong playlist trước khi đánh giá. 
+                        Hãy chấm điểm dựa trên trải nghiệm tổng thể của playlist theo các tiêu chí được mô tả 
+                        như độ đa dạng, độ mượt mà, cảm giác khám phá và mức độ hài lòng, 
+                        thay vì dựa trên mức độ yêu thích cá nhân đối với một bài hát, nghệ sĩ hoặc thể loại nhạc cụ thể.
                     </p>
                 </div>
-                """.replace("{pname}", pname), unsafe_allow_html=True)
+                """, unsafe_allow_html=True)
 
                 # ════════════════════════════════════════════════════
                 # PHẦN 1 — Sự đa dạng
